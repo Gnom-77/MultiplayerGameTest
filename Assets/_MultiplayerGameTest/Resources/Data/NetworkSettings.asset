@@ -15,4 +15,4 @@ MonoBehaviour:
   defaultTransport: 0
   defaultAdress: 127.0.0.1
   defaultPort: 1234
-  maxPlayers: 4
+  maxPlayers: 2
