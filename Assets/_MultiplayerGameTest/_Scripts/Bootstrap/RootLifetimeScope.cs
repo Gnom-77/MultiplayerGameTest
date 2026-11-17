@@ -1,4 +1,5 @@
 using System;
+using _MultiplayerGameTest._Scripts.Core.Identity;
 using _MultiplayerGameTest._Scripts.Core.Networking;
 using _MultiplayerGameTest._Scripts.Transports.Unity;
 using Unity.Netcode;
@@ -29,6 +30,10 @@ namespace _MultiplayerGameTest._Scripts.Bootstrap
             builder.RegisterComponent(networkManager);
             
             RegisterTransport(builder, options.Transport);
+            
+            builder.Register<LocalPlayerIdentityProvider>(Lifetime.Singleton).As<IPlayerIdentityProvider>();
+            builder.Register<ConnectionApprovalHandler>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<NetworkSessionService>().As<INetworkSessionService>();            
             
             builder.RegisterEntryPoint<EntryPoint>();
         }
