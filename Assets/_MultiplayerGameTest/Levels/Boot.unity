@@ -721,6 +721,7 @@ MonoBehaviour:
   networkManager: {fileID: 1127717430}
   rosterPrefab: {fileID: 590580119848318175, guid: db5990dbe0e3f064fbc67f36dbe0d344, type: 3}
   loadingScreenView: {fileID: 1864021834}
+  playerPrefab: {fileID: 4327747645375735767, guid: 9fff2b08dd19d7640bd07986e63ca7ed, type: 3}
 --- !u!4 &1838625409
 Transform:
   m_ObjectHideFlags: 0

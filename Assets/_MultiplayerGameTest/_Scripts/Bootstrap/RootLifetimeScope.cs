@@ -17,6 +17,7 @@ namespace _MultiplayerGameTest._Scripts.Bootstrap
         [SerializeField] private NetworkManager networkManager;
         [SerializeField] private NetworkPlayerRoster rosterPrefab;
         [SerializeField] private LoadingScreenView loadingScreenView;
+        [SerializeField] private NetworkObject playerPrefab;
         
         protected override void Awake()
         {
@@ -48,6 +49,7 @@ namespace _MultiplayerGameTest._Scripts.Bootstrap
             builder.RegisterEntryPoint<SceneLoadCoordinator>().As<ISceneLoadState>();
             builder.RegisterComponent(loadingScreenView);
             builder.RegisterEntryPoint<LoadingScreenPresenter>();
+            builder.RegisterEntryPoint<PlayerSpawner>().WithParameter(playerPrefab);
             
             builder.RegisterEntryPoint<EntryPoint>();
         }
