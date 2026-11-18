@@ -13,6 +13,7 @@ namespace _MultiplayerGameTest._Scripts.Bootstrap
     {
         [SerializeField] private NetworkSettings networkSettings;
         [SerializeField] private NetworkManager networkManager;
+        [SerializeField] private NetworkPlayerRoster rosterPrefab;
         
         protected override void Awake()
         {
@@ -34,6 +35,12 @@ namespace _MultiplayerGameTest._Scripts.Bootstrap
             builder.Register<LocalPlayerIdentityProvider>(Lifetime.Singleton).As<IPlayerIdentityProvider>();
             builder.Register<ConnectionApprovalHandler>(Lifetime.Singleton);
             builder.RegisterEntryPoint<NetworkSessionService>().As<INetworkSessionService>();            
+            
+            builder.RegisterInstance(rosterPrefab);
+            builder.Register<SessionEndNotice>(Lifetime.Singleton);
+            builder.Register<NetworkSceneService>(Lifetime.Singleton).As<INetworkSceneService>();
+            builder.RegisterEntryPoint<PlayerRosterService>().As<IPlayerRoster>();
+            builder.RegisterEntryPoint<SessionFlowController>();
             
             builder.RegisterEntryPoint<EntryPoint>();
         }

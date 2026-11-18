@@ -12,14 +12,16 @@ namespace _MultiplayerGameTest._Scripts.UI
         private readonly INetworkSessionService _session;
         private readonly IPlayerIdentityProvider _identity;
         private readonly LaunchOptions _options;
+        private readonly SessionEndNotice _notice;
 
         public MainMenuPresenter(MainMenuView view, INetworkSessionService session,
-            IPlayerIdentityProvider identity, LaunchOptions options)
+            IPlayerIdentityProvider identity, LaunchOptions options, SessionEndNotice notice)
         {
             _view = view;
             _session = session;
             _identity = identity;
             _options = options;
+            _notice = notice;
         }
 
         public void Start()
@@ -32,6 +34,9 @@ namespace _MultiplayerGameTest._Scripts.UI
             _view.StopClicked += OnStopClicked;
             _session.StateChanged += OnStateChanged;
             _session.SessionEnded += OnSessionEnded;
+            
+            if (_notice.TryConsume(out var reason))
+                _view.SetStatus(SessionEndMessages.Get(reason));
         }
 
         public void Dispose()

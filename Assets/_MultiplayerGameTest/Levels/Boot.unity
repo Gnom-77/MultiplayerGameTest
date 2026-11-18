@@ -229,6 +229,7 @@ MonoBehaviour:
   autoInjectGameObjects: []
   networkSettings: {fileID: 11400000, guid: ea11ab3947491024aab891099aa24f21, type: 2}
   networkManager: {fileID: 1127717430}
+  rosterPrefab: {fileID: 590580119848318175, guid: db5990dbe0e3f064fbc67f36dbe0d344, type: 3}
 --- !u!4 &1838625409
 Transform:
   m_ObjectHideFlags: 0

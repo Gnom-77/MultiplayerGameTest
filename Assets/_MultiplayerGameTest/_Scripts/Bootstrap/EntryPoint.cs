@@ -8,7 +8,7 @@ namespace _MultiplayerGameTest._Scripts.Bootstrap
 {
     public class EntryPoint : IStartable
     {
-        private const string MainMenuScene = "MainMenu";
+        private const string MainMenuScene = SceneNames.MainMenu;
         
         private readonly LaunchOptions _launchOptions;
         private readonly INetworkTransportProvider _transportProvider;
