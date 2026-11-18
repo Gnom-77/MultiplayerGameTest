@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using _MultiplayerGameTest._Scripts.Core;
 using _MultiplayerGameTest._Scripts.Core.Networking;
 using UnityEngine;
 using VContainer.Unity;
@@ -13,14 +14,18 @@ namespace _MultiplayerGameTest._Scripts.UI.Lobby
         private readonly INetworkSessionService _session;
         private readonly NetworkSettings _settings;
         private readonly StringBuilder _builder = new();
+        private readonly INetworkSceneService _scenes;
+        private readonly ISceneLoadState _loadState;
 
         public LobbyPresenter(LobbyView view, IPlayerRoster roster, INetworkSessionService session,
-            NetworkSettings settings)
+            NetworkSettings settings, INetworkSceneService scenes, ISceneLoadState loadState)
         {
             _view = view;
             _roster = roster;
             _session = session;
             _settings = settings;
+            _scenes = scenes;
+            _loadState = loadState;
         }
 
         public void Start()
@@ -43,7 +48,11 @@ namespace _MultiplayerGameTest._Scripts.UI.Lobby
 
         private void OnStartClicked()
         {
-            Debug.Log("[Lobby] Start pressed.");
+            // Ignore repeated clicks while a load is already running.
+            if (!_session.IsHost || _loadState.IsLoading)
+                return;
+
+            _scenes.LoadForAll(SceneNames.Game);
         }
 
         private void OnLeaveClicked() => _session.Shutdown();

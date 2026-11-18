@@ -1,7 +1,9 @@
 using System;
+using _MultiplayerGameTest._Scripts.Core;
 using _MultiplayerGameTest._Scripts.Core.Identity;
 using _MultiplayerGameTest._Scripts.Core.Networking;
 using _MultiplayerGameTest._Scripts.Transports.Unity;
+using _MultiplayerGameTest._Scripts.UI.Loading;
 using Unity.Netcode;
 using UnityEngine;
 using VContainer;
@@ -14,6 +16,7 @@ namespace _MultiplayerGameTest._Scripts.Bootstrap
         [SerializeField] private NetworkSettings networkSettings;
         [SerializeField] private NetworkManager networkManager;
         [SerializeField] private NetworkPlayerRoster rosterPrefab;
+        [SerializeField] private LoadingScreenView loadingScreenView;
         
         protected override void Awake()
         {
@@ -41,6 +44,10 @@ namespace _MultiplayerGameTest._Scripts.Bootstrap
             builder.Register<NetworkSceneService>(Lifetime.Singleton).As<INetworkSceneService>();
             builder.RegisterEntryPoint<PlayerRosterService>().As<IPlayerRoster>();
             builder.RegisterEntryPoint<SessionFlowController>();
+            
+            builder.RegisterEntryPoint<SceneLoadCoordinator>().As<ISceneLoadState>();
+            builder.RegisterComponent(loadingScreenView);
+            builder.RegisterEntryPoint<LoadingScreenPresenter>();
             
             builder.RegisterEntryPoint<EntryPoint>();
         }
