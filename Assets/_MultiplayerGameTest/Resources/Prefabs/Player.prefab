@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4327747645375735767}
   - component: {fileID: 4508809720507457361}
   - component: {fileID: 1412566083560318245}
+  - component: {fileID: 3544128798020823660}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -37,6 +38,7 @@ Transform:
   m_Children:
   - {fileID: 3060848626659393660}
   - {fileID: 3793433108650796922}
+  - {fileID: 2532775136342039792}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6648759811325308082
@@ -133,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2233202237
+  GlobalObjectIdHash: 1872505138
   InScenePlacedSourceGlobalObjectIdHash: 0
   m_InScenePlacedDisabledByDefault: 0
   DeferredDespawnTick: 0
@@ -216,6 +218,23 @@ MonoBehaviour:
   gravity: -20
   lookSensitivity: 0.1
   maxPitch: 80
+--- !u!114 &3544128798020823660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048474918523861963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd15a3a951cb455b9a932c14c4bea50f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_MultiplayerGameTest._Scripts.Gameplay.Player.PlayerInteraction
+  ShowTopMostFoldoutHeaderGroup: 1
+  controller: {fileID: 1412566083560318245}
+  cameraTransform: {fileID: 5840097262894096680}
+  holdPoint: {fileID: 2532775136342039792}
+  settings: {fileID: 11400000, guid: 4ecf84327b628394c88e1d2b34389124, type: 2}
 --- !u!1 &5057212857058723058
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +267,37 @@ Transform:
   - {fileID: 5840097262894096680}
   m_Father: {fileID: 4645848663656070756}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5629811539956481673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2532775136342039792}
+  m_Layer: 0
+  m_Name: HoldPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2532775136342039792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5629811539956481673}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.3, y: -0.3, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4645848663656070756}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6506794703393578241
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,7 +311,7 @@ GameObject:
   - component: {fileID: 2845189902429197527}
   - component: {fileID: 5587964460275696746}
   m_Layer: 0
-  m_Name: Nose
+  m_Name: Aeyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -403,7 +453,7 @@ Camera:
   m_GameObject: {fileID: 7559877502112443635}
   m_Enabled: 0
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -412,7 +462,7 @@ Camera:
   m_ShutterSpeed: 0.005
   m_Aperture: 16
   m_FocusDistance: 10
-  m_FocalLength: 50
+  m_FocalLength: 20.78461
   m_BladeCount: 5
   m_Curvature: {x: 2, y: 11}
   m_BarrelClipping: 0.25
@@ -427,7 +477,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: 0

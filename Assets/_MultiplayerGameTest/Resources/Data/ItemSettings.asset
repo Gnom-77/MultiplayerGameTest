@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235fde056e9b4241acff69c246c1f031, type: 3}
+  m_Name: ItemSettings
+  m_EditorClassIdentifier: Assembly-CSharp::_MultiplayerGameTest._Scripts.Gameplay.Items.ItemSettings
+  itemPrefabs:
+  - {fileID: 8848154054213815094, guid: f6ac39ca88512944a984a3644999ea4e, type: 3}
+  grabDistance: 3
+  serverDistanceSlack: 1.5
+  throwSpeed: 12
+  maxItems: 20
+  spawnCooldownSeconds: 0.3

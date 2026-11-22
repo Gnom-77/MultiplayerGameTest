@@ -19,6 +19,16 @@ namespace _MultiplayerGameTest._Scripts.Gameplay.Player
         [Header("Look")]
         [SerializeField] private float lookSensitivity = 0.1f;
         [SerializeField] private float maxPitch = 80f;
+        
+        /// <summary>
+        /// Local input of the owning client. Null for remote players.
+        /// </summary>
+        public PlayerInputReader InputReader => _input;
+
+        /// <summary>
+        /// True while the owner controls the character (cursor is captured).
+        /// </summary>
+        public bool InputActive => _input != null && _cursorLocked;
 
         private PlayerInputReader _input;
         private float _pitch;
