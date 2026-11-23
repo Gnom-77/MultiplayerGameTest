@@ -1,4 +1,6 @@
 using System;
+using _MultiplayerGameTest._Scripts.Core.Pause;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
@@ -14,13 +16,15 @@ namespace _MultiplayerGameTest._Scripts.Core.Networking
         private readonly INetworkSessionService _session;
         private readonly INetworkSceneService _scenes;
         private readonly SessionEndNotice _notice;
+        private readonly IPauseState _pause;
 
         public SessionFlowController(INetworkSessionService session, INetworkSceneService scenes,
-            SessionEndNotice notice)
+            SessionEndNotice notice, IPauseState pause)
         {
             _session = session;
             _scenes = scenes;
             _notice = notice;
+            _pause = pause;
         }
 
         public void Initialize()
@@ -43,6 +47,10 @@ namespace _MultiplayerGameTest._Scripts.Core.Networking
 
         private void OnSessionEnded(SessionEndReason reason)
         {
+            _pause.SetPaused(false);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            
             if (SceneManager.GetActiveScene().name == SceneNames.MainMenu)
                 return;
 

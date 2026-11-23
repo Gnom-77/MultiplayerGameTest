@@ -13,7 +13,7 @@ namespace _MultiplayerGameTest._Scripts.UI
                 case SessionEndReason.DuplicatePlayer: return "You are already in this session.";
                 case SessionEndReason.ConnectionTimeout: return "Connection timed out.";
                 case SessionEndReason.Kicked: return "You were kicked by the host.";
-                case SessionEndReason.ConnectionLost: return "Connection to the host was lost.";
+                case SessionEndReason.ConnectionLost: return "Connection to the host was lost or the host left the session.";
                 default: return "Disconnected.";
             }
         }

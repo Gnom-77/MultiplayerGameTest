@@ -1,3 +1,4 @@
+using _MultiplayerGameTest._Scripts.Core.Pause;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace _MultiplayerGameTest._Scripts.Gameplay.Player
         [SerializeField] private Transform cameraRoot;
         [SerializeField] private Camera playerCamera;
         [SerializeField] private AudioListener audioListener;
+        [SerializeField] private PauseState pauseState;
 
         [Header("Movement")]
         [SerializeField] private float moveSpeed = 5f;
@@ -19,21 +21,14 @@ namespace _MultiplayerGameTest._Scripts.Gameplay.Player
         [Header("Look")]
         [SerializeField] private float lookSensitivity = 0.1f;
         [SerializeField] private float maxPitch = 80f;
-        
-        /// <summary>
-        /// Local input of the owning client. Null for remote players.
-        /// </summary>
-        public PlayerInputReader InputReader => _input;
-
-        /// <summary>
-        /// True while the owner controls the character (cursor is captured).
-        /// </summary>
-        public bool InputActive => _input != null && _cursorLocked;
 
         private PlayerInputReader _input;
         private float _pitch;
         private float _verticalVelocity;
-        private bool _cursorLocked;
+
+        public PlayerInputReader InputReader => _input;
+
+        public bool InputActive => _input != null && !pauseState.IsPaused;
 
         public override void OnNetworkSpawn()
         {
@@ -50,7 +45,9 @@ namespace _MultiplayerGameTest._Scripts.Gameplay.Player
             }
 
             _input = new PlayerInputReader();
-            SetCursorLocked(true);
+            pauseState.SetPaused(false);
+            pauseState.Changed += ApplyCursor;
+            ApplyCursor();
         }
 
         public override void OnNetworkDespawn()
@@ -58,9 +55,13 @@ namespace _MultiplayerGameTest._Scripts.Gameplay.Player
             if (_input == null)
                 return;
 
+            pauseState.Changed -= ApplyCursor;
             _input.Dispose();
             _input = null;
-            SetCursorLocked(false);
+
+            pauseState.SetPaused(false);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         private void Update()
@@ -69,11 +70,12 @@ namespace _MultiplayerGameTest._Scripts.Gameplay.Player
                 return;
 
             if (_input.ToggleCursorPressed)
-                SetCursorLocked(!_cursorLocked);
+                pauseState.SetPaused(!pauseState.IsPaused);
 
-            var move = _cursorLocked ? _input.Move : Vector2.zero;
-            var look = _cursorLocked ? _input.Look : Vector2.zero;
-            var jump = _cursorLocked && _input.JumpPressed;
+            var active = !pauseState.IsPaused;
+            var move = active ? _input.Move : Vector2.zero;
+            var look = active ? _input.Look : Vector2.zero;
+            var jump = active && _input.JumpPressed;
 
             ApplyLook(look);
             ApplyMovement(move, jump);
@@ -104,9 +106,9 @@ namespace _MultiplayerGameTest._Scripts.Gameplay.Player
             controller.Move(velocity * Time.deltaTime);
         }
 
-        private void SetCursorLocked(bool locked)
+        private void ApplyCursor()
         {
-            _cursorLocked = locked;
+            var locked = !pauseState.IsPaused;
             Cursor.lockState = locked ? CursorLockMode.Locked : CursorLockMode.None;
             Cursor.visible = !locked;
         }

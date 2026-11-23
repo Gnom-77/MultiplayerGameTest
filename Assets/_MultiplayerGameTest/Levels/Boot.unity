@@ -722,6 +722,7 @@ MonoBehaviour:
   rosterPrefab: {fileID: 590580119848318175, guid: db5990dbe0e3f064fbc67f36dbe0d344, type: 3}
   loadingScreenView: {fileID: 1864021834}
   playerPrefab: {fileID: 4327747645375735767, guid: 9fff2b08dd19d7640bd07986e63ca7ed, type: 3}
+  pauseState: {fileID: 11400000, guid: 0523392c6f1b7384b80b5a7ed308b147, type: 2}
 --- !u!4 &1838625409
 Transform:
   m_ObjectHideFlags: 0

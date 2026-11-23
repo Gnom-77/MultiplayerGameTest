@@ -213,6 +213,7 @@ MonoBehaviour:
   cameraRoot: {fileID: 3793433108650796922}
   playerCamera: {fileID: 71684744902053565}
   audioListener: {fileID: 8863953086834506231}
+  pauseState: {fileID: 11400000, guid: 0523392c6f1b7384b80b5a7ed308b147, type: 2}
   moveSpeed: 5
   jumpHeight: 1.2
   gravity: -20
@@ -453,7 +454,7 @@ Camera:
   m_GameObject: {fileID: 7559877502112443635}
   m_Enabled: 0
   serializedVersion: 2
-  m_ClearFlags: 4
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
