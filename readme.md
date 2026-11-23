@@ -76,7 +76,7 @@ Example for a second instance of the same build on one PC:
 - **Steam is not implemented** (no Steam P2P transport, lobbies, Rich Presence or stats). The transport abstraction is in place:
   a Steam provider would implement `INetworkTransportProvider` (for example with a Facepunch-based NGO transport from
   `Unity-Technologies/multiplayer-community-contributions`), and the identity would come from a Steam `IPlayerIdentityProvider`.
-- **Hard disconnects are detected by the transport timeout** (about 20 seconds by default). It can be shortened through the transport's
+- **Hard disconnects are detected by the transport timeout** (about 15 seconds by default). It can be shortened through the transport's
   disconnect timeout setting; a clean exit or Alt+F4 is detected immediately.
 - **Connection approval and player-id uniqueness are tested only on a LAN or localhost.** There is no relay or NAT traversal with
   Unity Transport; internet play needs a forwarded port.
